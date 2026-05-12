@@ -12,7 +12,10 @@ app.config["TEMPLATES_AUTO_RELOAD"] = True
 db = SQL("sqlite:///database.db")
 
 # CONSTANTS
-MAX_ID = db.execute("SELECT COUNT(id) as counter FROM girls")[0]["counter"]
+try:
+    MAX_ID = db.execute("SELECT COUNT(id) as counter FROM girls")[0]["counter"]
+except:
+    MAX_ID = 0
 
 # On load redirect to battle
 @app.route("/", methods=["GET", "POST"])
